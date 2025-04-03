@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_home"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/margin_default"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_large"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_default"
+                android:text="@string/stories"
+                android:textColor="@color/text_color_primary"
+                android:textSize="@dimen/text_size_stories_header"
+                android:textStyle="bold" />
+
+            <com.personalization.stories.views.StoriesView
+                android:id="@+id/story"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:code="09d291f54de95e9e5bde43b343b0b0d7"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <personaClick.demo_android.feature.recommendationBlock.presentation.view.RecommendationBlockView
+                android:id="@+id/new_arrivals_recommendation_block_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_half_default" />
+
+            <personaClick.demo_android.feature.recommendationBlock.presentation.view.RecommendationBlockView
+                android:id="@+id/top_trends_recommendation_block_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <personaClick.demo_android.feature.recommendationBlock.presentation.view.RecommendationBlockView
+                android:id="@+id/you_like_recommendation_block_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

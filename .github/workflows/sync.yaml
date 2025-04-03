@@ -1,0 +1,28 @@
+name: Sync repositories
+
+on:
+  pull_request:
+  # TODO uncomment
+  # workflow_run:
+  #   workflows:
+  #     - "Publish to Play Store and Bump Version"
+  #   types:
+  #     - completed
+  # workflow_dispatch:
+
+jobs:
+  run:
+    # TODO uncomment
+    # uses: personaClick/workflow/.github/workflows/reusable-android-synchronization.yaml@master
+    uses: personaClick/workflow/.github/workflows/reusable-android-synchronization.yaml@refactor/reusable-android-synchronization
+    permissions: write-all
+    with:
+      appId: ${{ vars.PERSONACLICK_COURIER_ID }}
+      targetRepository: personaclick/android-sdk
+      sourceDirname: personaClick
+      targetDirname: personaClick
+      syncIgnore: ".git,.idea,version.properties,app/src/main/res/drawable/ic_app.xml,app/src/main/res/drawable/ic_logo.xml"
+      replacementExtentions: "*.kts,*.kt,*.md,*.xml,*.toml,*.yml,*.yaml"
+      replacementContents: "42a4cd11ebab3b0454778d18d4f3d5|42a4cd11ebab3b0454778d18d4f3d5,5a57812604806d58d3d98f8e9480cb97|5a57812604806d58d3d98f8e9480cb97,e4fd6e3a19610f7aea5534e96eec69d6|e4fd6e3a19610f7aea5534e96eec69d6,5a57812604806d58d3d98f8e9480cb97|aabc899d3db3d71c4032832e4291c16a,09d291f54de95e9e5bde43b343b0b0d7|09d291f54de95e9e5bde43b343b0b0d7,https://api.personaclick.com/|https://api.personaclick.com/,com.personaclick:personaclick-sdk|com.personaclick:personaclick-sdk,api.personaclick.com|api.personaclick.com,personaclick.com|personaclick.com,personaClick|personaClick,PersonaClick|PersonaClick,PersonaClick|PersonaClick"
+    secrets:
+      privateKey: ${{ secrets.PERSONACLICK_COURIER_SECRET }}
