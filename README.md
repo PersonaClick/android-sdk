@@ -1,4 +1,4 @@
-![personaclick_android_sdk_cover](https://github.com/user-attachments/assets/83efd12d-9420-430a-ae6a-b7deae56d29c)
+![personaclick_android_sdk_cover](https://github.com/user-attachments/assets/0fd12240-65f4-4dbe-ac10-30bda16496b6)
 ![Maven Central Version](https://img.shields.io/maven-central/v/com.personaclick/personaclick-sdk?style=for-the-badge)
 ![Kotlin](https://img.shields.io/badge/kotlin-2.0.0-%237F52FF.svg?style=for-the-badge&logo=kotlin&logoColor=white&labelColor=%237F52FF)
 ![Java](https://img.shields.io/badge/JAVA-20-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white&labelColor=%23ED8B00)
