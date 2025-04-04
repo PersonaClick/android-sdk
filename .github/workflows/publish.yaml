@@ -16,7 +16,7 @@ jobs:
     uses: personaClick/workflow/.github/workflows/reusable-android-version.yaml@master
     permissions: write-all
     with:
-      appId: ${{ vars.PERSONACLICK_COURIER_ID }}
+      appId: ${{ vars.PUBLIVERSIONER_ID }}
     secrets:
       appSecret: ${{ secrets.PUBLIVERSIONER_SECRET }}
 
@@ -25,7 +25,7 @@ jobs:
     uses: personaClick/workflow/.github/workflows/reusable-android-publish.yaml@master
     permissions: write-all
     with:
-      appId: ${{ vars.PERSONACLICK_COURIER_ID }}
+      appId: ${{ vars.PUBLIVERSIONER_ID }}
       PROPERTIES_FILE: gradle.properties
       SIGNING_SECRET_KEY_RING_FILE: com.personaClick.key.gpg
       SIGNING_SECRET_KEY_RING_FILE_LOCATION: ./personalization-sdk
@@ -49,6 +49,6 @@ jobs:
     uses: personaClick/workflow/.github/workflows/reusable-android-release.yaml@master
     permissions: write-all
     with:
-      appId: ${{ vars.PERSONACLICK_COURIER_ID }}
+      appId: ${{ vars.PUBLIVERSIONER_ID }}
     secrets:
       appSecret: ${{ secrets.PUBLIVERSIONER_SECRET }}
