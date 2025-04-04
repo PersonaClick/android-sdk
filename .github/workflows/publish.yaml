@@ -18,7 +18,7 @@ jobs:
     with:
       appId: ${{ vars.PERSONACLICK_COURIER_ID }}
     secrets:
-      appSecret: ${{ secrets.PUBLIVERSIONER_SECRET }}
+      appSecret: ${{ secrets.PERSONACLICK_COURIER_SECRET }}
 
   publish:
     needs: version
@@ -36,7 +36,7 @@ jobs:
       GRADLE_VERSION: 8.8
     secrets:
       SONATA_STAGING_PROFILE_ID: ${{ secrets.SONATA_STAGING_PROFILE_ID }}
-      appSecret: ${{ secrets.PUBLIVERSIONER_SECRET }}
+      appSecret: ${{ secrets.PERSONACLICK_COURIER_SECRET }}
       SONATA_USERNAME: ${{ secrets.SONATA_USERNAME }}
       SONATA_PASSWORD: ${{ secrets.SONATA_PASSWORD }}
       OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
@@ -51,4 +51,4 @@ jobs:
     with:
       appId: ${{ vars.PERSONACLICK_COURIER_ID }}
     secrets:
-      appSecret: ${{ secrets.PUBLIVERSIONER_SECRET }}
+      appSecret: ${{ secrets.PERSONACLICK_COURIER_SECRET }}
