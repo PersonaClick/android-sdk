@@ -16,7 +16,7 @@ jobs:
       GOOGLE_SERVICES_FILE_LOCATION: ./sample
       GOOGLE_SERVICES_FILE_NAME: google-services.json
       OSSRH_USERNAME: ${{ vars.OSSRH_USERNAME }}
-      VARIANT_NAME: ${{ vars.REES_VARIANT_NAME }}
+      VARIANT_NAME: ${{ vars.VARIANT_NAME }}
       URL: https://github.com/PersonaClick/android-sdk
       MAVEN_REPOSITORY_URL: https://maven.pkg.github.com/PersonaClick/android-sdk
     secrets:
