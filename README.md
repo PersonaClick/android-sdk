@@ -19,4 +19,4 @@ link:
 
 ## Author
 
-PersonaClick, desk@personaclick.com
+PersonaClick, success@personaclick.com
