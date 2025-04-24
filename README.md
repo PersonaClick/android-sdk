@@ -1,22 +1,55 @@
-![personaclick_android_sdk_cover](https://github.com/user-attachments/assets/0fd12240-65f4-4dbe-ac10-30bda16496b6)
-![Maven Central Version](https://img.shields.io/maven-central/v/com.personaclick/personaclick-sdk?style=for-the-badge)
-![Kotlin](https://img.shields.io/badge/kotlin-2.0.0-%237F52FF.svg?style=for-the-badge&logo=kotlin&logoColor=white&labelColor=%237F52FF)
-![Java](https://img.shields.io/badge/JAVA-20-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white&labelColor=%23ED8B00)
-![Gradle](https://img.shields.io/badge/Gradle-8.8-grey.svg?style=for-the-badge&logo=Gradle&logoColor=white)
-![Android-Gradle](https://img.shields.io/badge/Android_Gradle_Plugin-8.5.2-grey.svg?style=for-the-badge&logo=Gradle&logoColor=white)
+# Demo shop created on the basis of PersonaClick- IOS SDK
+
+[![Version](https://img.shields.io/cocoapods/v/PersonaClick.svg?style=flat)](https://cocoapods.org/pods/PersonaClick)
+![iOS](https://img.shields.io/badge/iOS-13%2B-blue)
+![Release](https://img.shields.io/badge/release-blueviolet)
+[![License](https://img.shields.io/cocoapods/l/PersonaClick.svg?style=flat)](https://cocoapods.org/pods/PersonaClick)
+
+![PersonaClick](https://github.com/user-attachments/assets/06eba2ec-d342-43a0-9ab5-bec6352490f0)
+
+<details>
+  <summary></summary>
+
+ ![1x1](https://github.com/user-attachments/assets/895082a8-e5ea-498c-bf78-d92519ba071b)
+
+</details>
 
 ## Description
 
-PersonaClick SDK for Android platform - the wide toolset for eCommerce apps.
-This SDK can be used to integrate in your own app for Android in few steps.
+This demo application was developed using the PersonaClick SDK for iOS to showcase the capabilities of this SDK.
 
-## Documentation
+## Version
 
-For detailed information on methods, please refer to the documentation available at the following
-link:
+Current app version: 1.0.0
 
-[Official API references](https://reference.api.personaclick.com/?kotlin#introduction)
+## Deployment Target
 
-## Author
+This SDK requires iOS 13.0 or later.
 
-PersonaClick, success@personaclick.com
+## Video and Screenshots
+
+### Video
+[Watch Demo Video](https://github.com/user-attachments/assets/8c5bcb21-306b-4613-acde-9089cf176954)
+
+
+## Code Example
+
+Here's a simple example to get you started:
+
+```swift
+import PersonaClick
+
+class SDKManager: SDKManaging {
+    var sdk: PersonalizationSDK?
+
+    init() {
+        initializeSDK()
+    }
+
+    private func initializeSDK() {
+        sdk = createPersonalizationSDK(
+            shopId: "YOUR_SHOP_ID",
+            apiDomain: "YOUR_DOMAIN"
+        )
+    }
+}

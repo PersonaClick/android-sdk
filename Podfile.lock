@@ -1,0 +1,31 @@
+PODS:
+  - PersonaClick (3.6.60)
+  - Resolver (1.5.1)
+
+DEPENDENCIES:
+  - PersonaClick (from `https://github.com/personaClick/ios-sdk.git`, branch `master`, tag `3.6.60`)
+  - Resolver
+
+SPEC REPOS:
+  trunk:
+    - Resolver
+
+EXTERNAL SOURCES:
+  PersonaClick:
+    :branch: master
+    :git: https://github.com/personaClick/ios-sdk.git
+    :tag: 3.6.60
+
+CHECKOUT OPTIONS:
+  PersonaClick:
+    :commit: dc609ccb926157ff61084dfd24a9121c6c113cac
+    :git: https://github.com/personaClick/ios-sdk.git
+    :tag: 3.6.60
+
+SPEC CHECKSUMS:
+  PersonaClick: 2df6596f22d0124892fba773f7e9af5e456a9bfd
+  Resolver: 0e2ce51257e9366c54afe1b9e9be25059e9b9300
+
+PODFILE CHECKSUM: f5c5b8211dfac0270afae6cef3623943c3e6bbea
+
+COCOAPODS: 1.16.2
