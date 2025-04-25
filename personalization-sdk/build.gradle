@@ -6,7 +6,7 @@ plugins {
     id 'kotlin-kapt'
 }
 
-version='2.0.70'
+version='2.0.69'
 
 android {
     compileSdkVersion 34
@@ -51,12 +51,12 @@ android {
     }
 
     productFlavors {
-        rees46 {
+        personaclick {
             dimension 'default'
-            ext.set("group", "com.rees46")
-            ext.set("libraryName", "com.rees46.sdk")
-            ext.set("webSite", "https://rees46.com")
-            ext.set("vcsUrl", "https://github.com/rees46/android-sdk")
+            ext.set("group", "com.personaclick")
+            ext.set("libraryName", "com.personaclick.sdk")
+            ext.set("webSite", "https://personaclick.com")
+            ext.set("vcsUrl", "https://github.com/personaclick/android-sdk")
         }
         personaclick {
             dimension 'default'
@@ -104,8 +104,8 @@ dependencies {
 }
 
 configurations {
-    rees46Debug
-    rees46Release
+    personaclickDebug
+    personaclickRelease
     personaclickDebug
     personaclickRelease
 }

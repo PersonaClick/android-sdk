@@ -13,7 +13,7 @@ on:
 jobs:
   version:
     if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
-    uses: personaClick/workflow/.github/workflows/reusable-android-version.yaml@master
+    uses: personaclick/workflow/.github/workflows/reusable-android-version.yaml@master
     permissions: write-all
     with:
       appId: ${{ vars.PERSONACLICK_COURIER_ID }}
@@ -22,12 +22,12 @@ jobs:
 
   publish:
     needs: version
-    uses: personaClick/workflow/.github/workflows/reusable-android-publish.yaml@master
+    uses: personaclick/workflow/.github/workflows/reusable-android-publish.yaml@master
     permissions: write-all
     with:
       appId: ${{ vars.PERSONACLICK_COURIER_ID }}
       PROPERTIES_FILE: gradle.properties
-      SIGNING_SECRET_KEY_RING_FILE: com.personaClick.key.gpg
+      SIGNING_SECRET_KEY_RING_FILE: com.personaclick.key.gpg
       SIGNING_SECRET_KEY_RING_FILE_LOCATION: ./personalization-sdk
       OSSRH_USERNAME: ${{ vars.OSSRH_USERNAME }}
       VARIANT_NAME: ${{ vars.VARIANT_NAME }}
@@ -46,7 +46,7 @@ jobs:
 
   release:
     needs: [publish, version]
-    uses: personaClick/workflow/.github/workflows/reusable-android-release.yaml@master
+    uses: personaclick/workflow/.github/workflows/reusable-android-release.yaml@master
     permissions: write-all
     with:
       appId: ${{ vars.PERSONACLICK_COURIER_ID }}
