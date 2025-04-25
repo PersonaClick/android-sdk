@@ -1,4 +1,4 @@
-name: Patch version, publish to Sona and create new GitHub release
+name: Publish to sonatype and GH-packages
 
 on:
   pull_request:
@@ -6,28 +6,17 @@ on:
       - closed
     branches:
       - master
-    paths-ignore:
-      - ".github/**"
   workflow_dispatch:
 
 jobs:
-  version:
-    if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
-    uses: personaClick/workflow/.github/workflows/reusable-android-version.yaml@master
-    permissions: write-all
-    with:
-      appId: ${{ vars.PERSONACLICK_COURIER_ID }}
-    secrets:
-      appSecret: ${{ secrets.PERSONACLICK_COURIER_SECRET }}
-
   publish:
-    needs: version
-    uses: personaClick/workflow/.github/workflows/reusable-android-publish.yaml@master
+    uses: personaclick/workflow/.github/workflows/reusable-android-publish.yaml@1cfee7e2e762eed3a3d7d67c413aa0bae7f5ffae
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'release/'))
     permissions: write-all
     with:
       appId: ${{ vars.PERSONACLICK_COURIER_ID }}
       PROPERTIES_FILE: gradle.properties
-      SIGNING_SECRET_KEY_RING_FILE: com.personaClick.key.gpg
+      SIGNING_SECRET_KEY_RING_FILE: com.personaclick.key.gpg
       SIGNING_SECRET_KEY_RING_FILE_LOCATION: ./personalization-sdk
       OSSRH_USERNAME: ${{ vars.OSSRH_USERNAME }}
       VARIANT_NAME: ${{ vars.VARIANT_NAME }}
@@ -43,12 +32,3 @@ jobs:
       SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
       SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
       SIGNING_KEY_FILE_AS_BASE64_STRING: ${{ secrets.SIGNING_KEY_FILE_AS_BASE64_STRING }}
-
-  release:
-    needs: [publish, version]
-    uses: personaClick/workflow/.github/workflows/reusable-android-release.yaml@master
-    permissions: write-all
-    with:
-      appId: ${{ vars.PERSONACLICK_COURIER_ID }}
-    secrets:
-      appSecret: ${{ secrets.PERSONACLICK_COURIER_SECRET }}
