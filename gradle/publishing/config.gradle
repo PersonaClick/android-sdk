@@ -3,7 +3,7 @@ ext {
 }
 
 ext {
-  	sonatypeIds = [rees46: sonatype_rees46]
+  	sonatypeIds = [personaclick: sonatype_personaclick]
 	publicationNames = []
 }
 
@@ -26,9 +26,9 @@ ext {
     }
 
     scm {
-        connection "scm:git:github.com:rees46/android-sdk.git"
-        developerConnection "scm:git:ssh://github.com:rees46/android-sdk.git"
-        url "https://github.com:rees46/android-sdk/tree/master"
+        connection "scm:git:github.com:personaclick/android-sdk.git"
+        developerConnection "scm:git:ssh://github.com:personaclick/android-sdk.git"
+        url "https://github.com:personaclick/android-sdk/tree/master"
     }
   }
 }

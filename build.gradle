@@ -18,6 +18,13 @@ plugins {
     id 'org.jetbrains.kotlin.android' version '2.0.0' apply false
 }
 
+def versionFile = file("version.properties")
+def projectVersion = versionFile.text.split("VERSION_NAME=")[1].trim()
+
+project(':personalizationSdk') {
+	version=projectVersion
+}
+
 allprojects {
     repositories {
         google()
