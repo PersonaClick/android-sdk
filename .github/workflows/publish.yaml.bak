@@ -1,0 +1,35 @@
+name: Publish to sonatype and GH-packages
+
+on:
+  pull_request:
+  #   types:
+  #     - closed
+  #   branches:
+  #     - master
+  # workflow_dispatch:
+
+jobs:
+  publish:
+    # uses: personaclick/workflow/.github/workflows/reusable-android-publish.yaml@1cfee7e2e762eed3a3d7d67c413aa0bae7f5ffae
+    uses: personaclick/workflow/.github/workflows/reusable-android-publish.yaml@fix/publish-android
+    # if: github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'release/'))
+    permissions: write-all
+    with:
+      appId: ${{ vars.PERSONACLICK_COURIER_ID }}
+      PROPERTIES_FILE: gradle.properties
+      SIGNING_SECRET_KEY_RING_FILE: com.personaclick.key.gpg
+      SIGNING_SECRET_KEY_RING_FILE_LOCATION: ./personalization-sdk
+      OSSRH_USERNAME: ${{ vars.OSSRH_USERNAME }}
+      VARIANT_NAME: ${{ vars.VARIANT_NAME }}
+      URL: ${{ vars.REPO_URL }}
+      MAVEN_REPOSITORY_URL: ${{ vars.MAVEN_URL }}
+      GRADLE_VERSION: 8.8
+    secrets:
+      SONATA_STAGING_PROFILE_ID: ${{ secrets.SONATA_STAGING_PROFILE_ID }}
+      appSecret: ${{ secrets.PERSONACLICK_COURIER_SECRET }}
+      SONATA_USERNAME: ${{ secrets.SONATA_USERNAME }}
+      SONATA_PASSWORD: ${{ secrets.SONATA_PASSWORD }}
+      OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+      SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
+      SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
+      SIGNING_KEY_FILE_AS_BASE64_STRING: ${{ secrets.SIGNING_KEY_FILE_AS_BASE64_STRING }}
