@@ -7,11 +7,11 @@ on:
 
 jobs:
   Check:
-    uses: personaClick/workflow/.github/workflows/reusable-android-checks.yaml@master
+    uses: personaclick/workflow/.github/workflows/reusable-android-checks.yaml@master
     permissions: write-all
     with:
       PROPERTIES_FILE: gradle.properties
-      SIGNING_SECRET_KEY_RING_FILE: com.personaClick.key.gpg
+      SIGNING_SECRET_KEY_RING_FILE: com.personaclick.key.gpg
       SIGNING_SECRET_KEY_RING_FILE_LOCATION: ./personalization-sdk
       GOOGLE_SERVICES_FILE_LOCATION: ./sample
       GOOGLE_SERVICES_FILE_NAME: google-services.json
