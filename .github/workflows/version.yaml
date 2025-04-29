@@ -1,18 +1,22 @@
 name: Bump version
 
 on:
-  push:
-    branches:
-      - master
-    paths-ignore:
-      - ".github/**"
-      - "version.properties"
-  workflow_dispatch:
+  pull_request:
+  # TODO
+  # push:
+  #   branches:
+  #     - master
+  #   paths-ignore:
+  #     - ".github/**"
+  #     - "version.properties"
+  # workflow_dispatch:
 
 jobs:
   bump-version:
-    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.merged == true && !startsWith(github.event.pull_request.head.ref, 'release/'))
-    uses: personaclick/workflow/.github/workflows/reusable-multiplatform-version-bump.yaml@master
+    # TODO
+    # if: github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.merged == true && !startsWith(github.event.pull_request.head.ref, 'release/'))
+    # uses: personaclick/workflow/.github/workflows/reusable-multiplatform-version-bump.yaml@master
+    uses: personaclick/workflow/.github/workflows/reusable-multiplatform-version-bump.yaml@fix/version
     permissions: write-all
     secrets:
       appSecret: ${{ secrets.PERSONACLICK_COURIER_SECRET }}
