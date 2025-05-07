@@ -11,7 +11,7 @@ on:
 jobs:
   publish:
     if: github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'release/'))
-    uses: personaclick/workflow/.github/workflows/reusable-android-publish.yaml@d6d23e924224f75a134a47b364002c48bf0c88da
+    uses: personaclick/workflow/.github/workflows/reusable-android-publish.yaml@master
     permissions: write-all
     with:
       appId: ${{ vars.PERSONACLICK_COURIER_ID }}
