@@ -1,4 +1,4 @@
-package com.rees46.sdk
+package com.personaclick.sdk
 
 import android.content.Context
 import com.personalization.BuildConfig
@@ -11,15 +11,15 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class REES46 private constructor() : SDK() {
+class PersonaClick private constructor() : SDK() {
 
     companion object {
 
         private val coroutineScope = CoroutineScope(Dispatchers.Main + Job())
 
         private val API_URL: String = when {
-            BuildConfig.DEBUG -> "dev.api.rees46.com:8000"
-            else -> "api.rees46.ru"
+            BuildConfig.DEBUG -> "dev.api.personaclick.com:8000"
+            else -> "api.personaclick.ru"
         }
 
         fun getInstance(): SDK = instance
