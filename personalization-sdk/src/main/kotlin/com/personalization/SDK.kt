@@ -115,7 +115,7 @@ open class SDK {
     fun initialize(
         context: Context,
         shopId: String,
-        apiDomain: String = "api.personaclick.ru",
+        apiDomain: String = "api.personaclick.com",
         tag: String = TAG,
         preferencesKey: String = DEFAULT_STORAGE_KEY,
         stream: String = ANDROID,
