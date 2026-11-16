@@ -1,6 +1,8 @@
 package com.personalization;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -26,5 +28,35 @@ public class PersonaClickConfigJavaTest {
 
         assertEquals("api.personaclick.com", config.getApiDomain());
         assertEquals("SDK", config.getTag());
+        assertFalse(config.getCoreV2());
+    }
+
+    @Test
+    public void theNewCoreKeepsItsPlace() {
+        PersonaClickConfig config = new PersonaClickConfig(
+                "shop", "api.personaclick.com", "android", true, false, true, "SDK", true, LogLevel.WARNING, true);
+
+        assertTrue(config.getCoreV2());
+        assertNull(config.getStorageKey());
+    }
+
+    @Test
+    public void theStorageKeyKeepsItsPlace() {
+        PersonaClickConfig config = new PersonaClickConfig(
+                "shop", "api.personaclick.com", "android", true, false, true, "SDK", true, LogLevel.WARNING, false, "host");
+
+        assertEquals("host", config.getStorageKey());
+        assertNull(config.getDeviceId());
+        assertFalse(config.getSendAdvertisingId());
+    }
+
+    @Test
+    public void theDeviceIdAndTheAdvertisingIdComeLast() {
+        PersonaClickConfig config = new PersonaClickConfig(
+                "shop", "api.personaclick.com", "android", true, false, true, "SDK", true, LogLevel.WARNING, false, null,
+                "did-from-rn", true);
+
+        assertEquals("did-from-rn", config.getDeviceId());
+        assertTrue(config.getSendAdvertisingId());
     }
 }
