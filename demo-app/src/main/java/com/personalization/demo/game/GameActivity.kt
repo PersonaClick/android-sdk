@@ -143,7 +143,7 @@ class GameActivity : AppCompatActivity() {
         )
 
         /** `null` — the shop did not initialize. */
-        private fun shopSdk(): SDK? = runCatching { PersonaClick.getInstance(BuildConfig.SHOP_ID) }.getOrNull()
+        private fun shopSdk(): SDK? = runCatching { PersonaClick.instance(BuildConfig.SHOP_ID) }.getOrNull()
 
         /** Opens the game of the game link [link] over the screen of [context]. */
         fun start(context: Context, link: String) {

@@ -55,9 +55,9 @@ fun MultiInstancePane(
 
     // Re-reading the sessions after B's async /init lands: bumping this recomposes the cards.
     var refreshToken by remember { mutableStateOf(0) }
-    val shopA = remember(refreshToken) { runCatching { PersonaClick.getInstance(shopIdA) }.getOrNull() }
+    val shopA = remember(refreshToken) { runCatching { PersonaClick.instance(shopIdA) }.getOrNull() }
     // Resolving B by its id materializes the lazy registration — this is where shop B is born.
-    val shopB = remember(refreshToken) { runCatching { PersonaClick.getInstance(shopIdB) }.getOrNull() }
+    val shopB = remember(refreshToken) { runCatching { PersonaClick.instance(shopIdB) }.getOrNull() }
 
     // The global PersonaClick.setOnMessageListener (DemoApplication) already posts a notification for every
     // shop. This extra, screen-scoped subscriber shows the (deprecated) per-instance
@@ -115,10 +115,10 @@ fun MultiInstancePane(
 
         // Fail-fast contracts, exercised live.
         Text(text = stringResource(R.string.mi_contracts_title), fontWeight = FontWeight.Bold)
-        Button(onClick = { log(runContract { PersonaClick.getInstance() }) }) {
+        Button(onClick = { log(runContract { PersonaClick.instance() }) }) {
             Text(text = stringResource(R.string.mi_btn_ambiguous))
         }
-        Button(onClick = { log(runContract { PersonaClick.getInstance("nope") }) }) {
+        Button(onClick = { log(runContract { PersonaClick.instance("nope") }) }) {
             Text(text = stringResource(R.string.mi_btn_unknown))
         }
 

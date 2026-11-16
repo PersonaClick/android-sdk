@@ -66,8 +66,8 @@ class MultiInstanceE2ETest {
 
     @Test
     fun bothShops_resolveToDistinctInstances() {
-        val a = PersonaClick.getInstance(shopA)
-        val b = PersonaClick.getInstance(shopB) // materializes the lazily-registered shop B
+        val a = PersonaClick.instance(shopA)
+        val b = PersonaClick.instance(shopB) // materializes the lazily-registered shop B
         assertNotNull(a)
         assertNotNull(b)
         assertNotSame("Each shop must have its own SDK instance", a, b)
@@ -84,19 +84,19 @@ class MultiInstanceE2ETest {
 
     @Test
     fun defaultGetInstance_isAmbiguousWithTwoShopsLive() {
-        PersonaClick.getInstance(shopB) // make both live
-        assertThrowsOf<AmbiguousShopException> { PersonaClick.getInstance() }
+        PersonaClick.instance(shopB) // make both live
+        assertThrowsOf<AmbiguousShopException> { PersonaClick.instance() }
     }
 
     @Test
     fun getInstance_forUnknownShop_throwsUnknownShopId() {
-        assertThrowsOf<UnknownShopIdException> { PersonaClick.getInstance("nope-not-a-shop") }
+        assertThrowsOf<UnknownShopIdException> { PersonaClick.instance("nope-not-a-shop") }
     }
 
     @Test
     fun handlePush_routesToTheNamedShopOnly() {
-        val a = PersonaClick.getInstance(shopA)
-        val b = PersonaClick.getInstance(shopB)
+        val a = PersonaClick.instance(shopA)
+        val b = PersonaClick.instance(shopB)
         val toA = mutableListOf<NotificationData>()
         val toB = mutableListOf<NotificationData>()
         a.setOnMessageListener { toA.add(it) }
@@ -113,8 +113,8 @@ class MultiInstanceE2ETest {
 
     @Test
     fun handlePush_withUnknownShop_isDropped() {
-        val a = PersonaClick.getInstance(shopA)
-        val b = PersonaClick.getInstance(shopB)
+        val a = PersonaClick.instance(shopA)
+        val b = PersonaClick.instance(shopB)
         val toA = mutableListOf<NotificationData>()
         val toB = mutableListOf<NotificationData>()
         a.setOnMessageListener { toA.add(it) }
@@ -130,7 +130,7 @@ class MultiInstanceE2ETest {
 
     @Test
     fun handlePush_clicked_tracksTheClickOnTheNamedShop() {
-        PersonaClick.getInstance(shopB) // ensure B is live and its session is ready
+        PersonaClick.instance(shopB) // ensure B is live and its session is ready
         HttpLogStore.clear()
 
         // CLICKED goes through notificationClicked, whose extractor reads NOTIFICATION_TYPE/
@@ -161,7 +161,7 @@ class MultiInstanceE2ETest {
         // used by no other test, so on a fresh process it is genuinely pending here.
         val lazyShop = "mi-materialize-on-push"
         val context = InstrumentationRegistry.getInstrumentation().targetContext
-        PersonaClick.registerShops(
+        PersonaClick.register(
             context = context,
             configs = listOf(PersonaClickConfig(shopId = lazyShop, autoSendPushToken = false)),
             eagerInit = false
@@ -196,8 +196,8 @@ class MultiInstanceE2ETest {
 
     /** Both shops live, then poll until the server has assigned each a did/sid (async /init). */
     private fun awaitSessions(timeoutMs: Long = 10_000): Sessions {
-        val a = PersonaClick.getInstance(shopA)
-        val b = PersonaClick.getInstance(shopB)
+        val a = PersonaClick.instance(shopA)
+        val b = PersonaClick.instance(shopB)
         val deadline = System.currentTimeMillis() + timeoutMs
         var s = read(a, b)
         while (System.currentTimeMillis() < deadline &&
