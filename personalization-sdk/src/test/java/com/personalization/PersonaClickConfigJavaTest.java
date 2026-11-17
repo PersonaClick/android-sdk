@@ -28,22 +28,13 @@ public class PersonaClickConfigJavaTest {
 
         assertEquals("api.personaclick.com", config.getApiDomain());
         assertEquals("SDK", config.getTag());
-        assertFalse(config.getCoreV2());
+        assertEquals(LogLevel.WARNING, config.getLogLevel());
     }
 
     @Test
-    public void theNewCoreKeepsItsPlace() {
+    public void theStorageKeyFollowsTheLogLevel() {
         PersonaClickConfig config = new PersonaClickConfig(
-                "shop", "api.personaclick.com", "android", true, false, true, "SDK", true, LogLevel.WARNING, true);
-
-        assertTrue(config.getCoreV2());
-        assertNull(config.getStorageKey());
-    }
-
-    @Test
-    public void theStorageKeyKeepsItsPlace() {
-        PersonaClickConfig config = new PersonaClickConfig(
-                "shop", "api.personaclick.com", "android", true, false, true, "SDK", true, LogLevel.WARNING, false, "host");
+                "shop", "api.personaclick.com", "android", true, false, true, "SDK", true, LogLevel.WARNING, "host");
 
         assertEquals("host", config.getStorageKey());
         assertNull(config.getDeviceId());
@@ -53,7 +44,7 @@ public class PersonaClickConfigJavaTest {
     @Test
     public void theDeviceIdAndTheAdvertisingIdComeLast() {
         PersonaClickConfig config = new PersonaClickConfig(
-                "shop", "api.personaclick.com", "android", true, false, true, "SDK", true, LogLevel.WARNING, false, null,
+                "shop", "api.personaclick.com", "android", true, false, true, "SDK", true, LogLevel.WARNING, null,
                 "did-from-rn", true);
 
         assertEquals("did-from-rn", config.getDeviceId());
