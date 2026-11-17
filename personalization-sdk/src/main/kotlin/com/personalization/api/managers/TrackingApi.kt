@@ -10,7 +10,7 @@ import com.personalization.api.models.tracking.TrackingSource
  *
  * Reached through an SDK instance: `PersonaClick.instance().tracking.productView("sku-1")`.
  *
- * On the new core (`PersonaClickConfig.coreV2`) every event goes through the queue: the method returns at
+ * On the new core (`PersonaClick.initializeBridge`) every event goes through the queue: the method returns at
  * once, and a `listener` is kept until the event is sent — after a launch without a network that may be
  * as long as the queue keeps an event, 7 days — then hears the server's answer, or the error that
  * dropped the event. An event the queue refuses at once (an empty id, a released instance, a refused

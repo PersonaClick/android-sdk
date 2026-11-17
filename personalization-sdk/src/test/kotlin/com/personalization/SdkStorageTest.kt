@@ -129,12 +129,11 @@ class SdkStorageTest {
         SdkLogs.handlerExecutor = defaultExecutor
     }
 
-    private fun config(storageKey: String? = null, coreV2: Boolean = false) = PersonaClickConfig(
+    private fun config(storageKey: String? = null) = PersonaClickConfig(
         shopId = SHOP,
         apiDomain = server.url("/").toString().trimEnd('/'),
         autoSendPushToken = false,
         logLevel = LogLevel.DEBUG,
-        coreV2 = coreV2,
         storageKey = storageKey,
     )
 
@@ -259,7 +258,7 @@ class SdkStorageTest {
             initCount.set(0)
             inits.clear()
             context.getSharedPreferences(StorageLayout(SHOP, null).partitionName, Context.MODE_PRIVATE).edit().clear().commit()
-            val sdk = PersonaClick.initialize(context, config(coreV2 = coreV2))
+            val sdk = PersonaClick.initialize(context, config(), coreV2)
             awaitReady(sdk, "did-1")
             // The io thread is busy until the test lets it go: the wipe waits there.
             val busy = CountDownLatch(1)
@@ -400,7 +399,7 @@ class SdkStorageTest {
 
     @Test
     fun `on the new core the deletion takes the queue too`() {
-        val sdk = PersonaClick.initialize(context, config(coreV2 = true))
+        val sdk = PersonaClick.initialize(context, config(), coreV2 = true)
         val queue = sdk.storage?.queuePath?.also { it.mkdirs() }
         File(queue, "event").writeText("{}")
 

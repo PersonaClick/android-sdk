@@ -130,8 +130,8 @@ class TrackingQueueTest {
                 shopId = SHOP,
                 apiDomain = server.url("/").toString().trimEnd('/'),
                 autoSendPushToken = false,
-                coreV2 = coreV2,
-            )
+            ),
+            coreV2,
         )
         runBlocking { withTimeout(5_000) { sdk.instanceState.changes.first { it == SdkState.READY } } }
         return sdk
@@ -242,7 +242,8 @@ class TrackingQueueTest {
         val sdk = SDK().apply { dispatchers = CoreDispatchers(main = { main }) }
         sdk.initializeWith(
             context,
-            PersonaClickConfig(shopId = SHOP, apiDomain = server.url("/").toString().trimEnd('/'), autoSendPushToken = false, coreV2 = true),
+            PersonaClickConfig(shopId = SHOP, apiDomain = server.url("/").toString().trimEnd('/'), autoSendPushToken = false),
+            coreV2 = true,
         )
         runBlocking { withTimeout(5_000) { sdk.instanceState.changes.first { it == SdkState.READY } } }
         val ends = LinkedBlockingQueue<Pair<SdkResult<Unit>, Boolean>>()

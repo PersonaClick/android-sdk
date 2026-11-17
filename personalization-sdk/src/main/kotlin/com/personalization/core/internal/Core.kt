@@ -10,8 +10,8 @@ import org.json.JSONObject
  * `SendNetworkMethodUseCase`) hands every request to the instance's core, so the namespaces are the
  * same code for both cores.
  *
- * [LegacyCore] keeps today's paths. [CoreV2] is the new core, chosen by `PersonaClickConfig.coreV2`: its own
- * client, `/init` ([CoreInit]), session ([SessionWindow]) and event queue ([EventQueue]).
+ * [LegacyCore] keeps today's paths. [CoreV2] is the new core, the bridges' (`PersonaClick.initializeBridge`): its
+ * own client, `/init` ([CoreInit]), session ([SessionWindow]) and event queue ([EventQueue]).
  */
 internal interface Core {
 
