@@ -49,5 +49,16 @@ public class PersonaClickConfigJavaTest {
 
         assertEquals("did-from-rn", config.getDeviceId());
         assertTrue(config.getSendAdvertisingId());
+        assertEquals("app.personaclick.ru", config.getAppDomain());
+    }
+
+    @Test
+    public void theAppDomainComesLast() {
+        PersonaClickConfig config = new PersonaClickConfig(
+                "shop", "api.personaclick.com", "android", true, false, true, "SDK", true, LogLevel.WARNING, null,
+                null, false, "app.cluster.example");
+
+        assertEquals("app.cluster.example", config.getAppDomain());
+        assertEquals("api.personaclick.com", config.getApiDomain());
     }
 }
