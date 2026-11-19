@@ -46,7 +46,7 @@ import java.util.concurrent.TimeUnit
 
 /**
  * The new core is the bridges': [PersonaClick.initializeBridge] starts a shop on it, with the A/B group the bridge
- * kept for the device, while [PersonaClick.initialize], [PersonaClick.register] and [PersonaClickConfig] give apps no way to it.
+ * kept for the device, and [PersonaClick.registerBridge] registers shops on it, while [PersonaClick.initialize], [PersonaClick.register] and [PersonaClickConfig] give apps no way to it.
  */
 @OptIn(BridgeApi::class)
 @RunWith(RobolectricTestRunner::class)
@@ -145,6 +145,30 @@ class BridgeInitTest {
         assertTrue(PersonaClick.instance(SHOP) === sdk)
         awaitReady(sdk)
         assertFalse(logged.any { it.code == LogCodes.CORE_FLAG_MISMATCH })
+    }
+
+    @Test
+    fun `a bridge's registration decides the process's core with no request, and its shop starts on first use`() {
+        PersonaClick.registerBridge(context, listOf(config(), config(OTHER)))
+
+        assertEquals(true, CoreSelection.decided())
+        assertFalse(PersonaClick.isInitialized(SHOP))
+        assertEquals("nothing goes at the registration", null, requests.poll(500, TimeUnit.MILLISECONDS))
+
+        val sdk = PersonaClick.initializeBridge(context, config())
+        assertTrue(sdk.core is CoreV2)
+        assertEquals("/init", requests.poll(5, TimeUnit.SECONDS)?.encodedPath)
+        assertTrue("an app's lookup starts the other shop, on the new core", PersonaClick.instance(OTHER).core is CoreV2)
+        assertFalse(logged.any { it.code == LogCodes.CORE_FLAG_MISMATCH })
+    }
+
+    @Test
+    fun `a bridge's registration in a process an app's initialize decided runs on the legacy core and warns`() {
+        PersonaClick.initialize(context, config())
+        PersonaClick.registerBridge(context, listOf(config(OTHER)))
+
+        assertTrue(PersonaClick.instance(OTHER).core is LegacyCore)
+        assertEquals(1, logged.count { it.code == LogCodes.CORE_FLAG_MISMATCH && it.shopId == OTHER })
     }
 
     @Test
@@ -318,8 +342,10 @@ class BridgeInitTest {
         assertEquals((1..13).toList(), visible.map { it.parameterCount }.sorted())
         val copies = PersonaClickConfig::class.java.methods.filter { it.name == "copy" && !it.isSynthetic }
         assertEquals(listOf(newParameters), copies.map { it.parameterTypes.toList() })
-        val bridgeEntries = PersonaClick::class.java.methods.filter { it.name.startsWith("initializeBridge") }
-        assertTrue(bridgeEntries.isNotEmpty() && bridgeEntries.all { it.isSynthetic })
+        listOf("initializeBridge", "registerBridge").forEach { name ->
+            val bridgeEntries = PersonaClick::class.java.methods.filter { it.name.startsWith(name) }
+            assertTrue(name, bridgeEntries.isNotEmpty() && bridgeEntries.all { it.isSynthetic })
+        }
     }
 
     @Test
